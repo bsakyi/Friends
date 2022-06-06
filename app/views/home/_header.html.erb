@@ -17,22 +17,28 @@
       <li class="nav-item">
         <%= link_to 'Friends', friends_path, class:"nav-link" %>
       </li>
-
+    
       <li class="nav-item">
+      <% if user_signed_in? %>
         <%= link_to 'Add Friend', new_friend_path, class:"nav-link" %>
+        <% end %>
       </li>
-
+    
 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
+          Users
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
+        <% if !user_signed_in? %>
+          <%= link_to 'Sign Up', new_user_registration_path, class:"dropdown-item"%>
+          <%= link_to 'Sign In', new_user_session_path, class:"dropdown-item"%>
+        <% else %>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+          <%= link_to 'Edit Profile', edit_user_registration_path, class:"dropdown-item"%>
+          <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class:"dropdown-item"%>
         </div>
+        <% end %>
       </li>
 
       
